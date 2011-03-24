@@ -3,9 +3,16 @@ require 'spec_helper'
 
 describe URIParser do
   def self.describe_parsed(url, &block)
-    describe "URIParser.new('#{url}')" do
+    describe ".new('#{url}')" do
       subject { described_class.new(url) }
       module_eval(&block)
+    end
+  end
+
+  describe '#normalized' do
+    it 'is an alias for #uri' do
+      uri = URIParser.new('http://foo.com')
+      uri.normalized.should == 'http://foo.com/'
     end
   end
 
@@ -16,6 +23,8 @@ describe URIParser do
     its(:query) { should == 'a=b&c=d' }
     its(:valid?) { should be_true }
     its(:uri) { should == 'http://example.com/foo/bar?a=b&c=d' }
+    its(:path_and_query) { should == '/foo/bar?a=b&c=d' }
+    its(:query_params) { should == { 'a' => 'b', 'c' => 'd' } }
   end
 
   describe_parsed '@#4ioasfajdkshfas' do
@@ -34,5 +43,12 @@ describe URIParser do
   describe_parsed 'http://subdomain.bar.com' do
     its(:host) { should == 'subdomain.bar.com' }
     its(:path) { should == '/' }
+    its(:query) { should == '' }
+    its(:path_and_query) { should == '/' }
+  end
+
+  describe_parsed 'http://domain.com?a param=a value' do
+    its(:uri) { should == 'http://domain.com/?a%20param=a%20value' }
+    its(:query_params) { should == { 'a param' => 'a value' } }
   end
 end
