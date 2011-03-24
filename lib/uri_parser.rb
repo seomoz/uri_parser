@@ -1,3 +1,2 @@
-module URIParser
-  # Your code goes here...
+class URIParser
 end
