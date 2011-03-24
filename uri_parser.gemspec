@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "uri_parser"
   s.version     = UriParser::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = %w[Myron Marston]
+  s.email       = %w[myron.marston@gmail.com]
+  s.homepage    = "https://github.com/seomoz/uri_parser"
+  s.summary     = "A fast URI parser and normalizer"
+  s.description = "Parses and normalizes URIs very quickly, using Google's URI canonicalization library"
 
   s.rubyforge_project = "uri_parser"
 
