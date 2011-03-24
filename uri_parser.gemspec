@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.extensions    = ["ext/uri_parser/extconf.rb"]
   s.require_paths = ["lib"]
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 1.8.7'
 
   s.add_development_dependency 'rspec', '~> 2.5'
   s.add_development_dependency 'rake-compiler', '~> 0.7.6'
