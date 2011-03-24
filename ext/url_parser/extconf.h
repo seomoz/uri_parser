@@ -1,0 +1,6 @@
+#ifndef EXTCONF_H
+#define EXTCONF_H
+#define HAVE_UNICODE_UCNV_H 1
+#define HAVE_UNICODE_UCNV_CB_H 1
+#define HAVE_UNICODE_UIDNA_H 1
+#endif
