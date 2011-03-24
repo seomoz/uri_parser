@@ -4,7 +4,7 @@ require "uri_parser/version"
 
 Gem::Specification.new do |s|
   s.name        = "uri_parser"
-  s.version     = UriParser::VERSION
+  s.version     = URIParser::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = %w[Myron Marston]
   s.email       = %w[myron.marston@gmail.com]
