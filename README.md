@@ -8,7 +8,7 @@ Google's code is is BSD-licensed.
 
 This gem requires the ICU library. Under Linux (Ubuntu) the proper
 version may be installed via apt-get (e.g. `apt-get install libicu40`).
-Under Mac OSX it may be installed with homebrew (e.g. `brew install icu4c`).
+Under Mac OSX it may be installed with homebrew (e.g. `brew install icu4c`).  Note that after installing with homebrew, you will likely have to `brew link icu4c`.  See the printout after installing the package for details.
 
 ## Why?
 
