@@ -20,7 +20,7 @@ class URIParser
       {}.tap do |hash|
         k_v_pairs.each do |kv|
           key, value = kv.split('=')
-          hash[CGI.unescape(key)] = CGI.unescape(value)
+          hash[CGI.unescape(key)] = value && CGI.unescape(value)
         end
       end
     end
