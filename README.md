@@ -16,21 +16,22 @@ Under Mac OSX it may be installed with homebrew (e.g. `brew install icu4c`).  No
 functionality (and more!) but is slow.  This gem is much faster.
 
 ## Example
+```ruby
+require 'uri_parser'
 
-    require 'uri_parser'
-
-    noncan = 'http://руцентр.рф/Iñtërnâtiônàlizætiøn!?i18n=true'
-    url = URIParser.new(noncan)
-    puts <<TO_THE_END
-        non-canonicalized: #{noncan}
-        canonicalized: #{url.uri}
-        scheme: #{url.scheme}
-        host: #{url.host}
-        port: #{url.port}
-        path: #{url.path}
-        query: #{url.query}
-        valid: #{url.valid?}
-    TO_THE_END
+noncan = 'http://руцентр.рф/Iñtërnâtiônàlizætiøn!?i18n=true'
+url = URIParser.new(noncan)
+puts <<TO_THE_END
+    non-canonicalized: #{noncan}
+    canonicalized: #{url.uri}
+    scheme: #{url.scheme}
+    host: #{url.host}
+    port: #{url.port}
+    path: #{url.path}
+    query: #{url.query}
+    valid: #{url.valid?}
+TO_THE_END
+```
 
 __Note__: If a URL is marked as invalid then the state/value of any of its other properties is undefined.
 
