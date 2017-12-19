@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.require_paths = %w[ lib ext ]
   s.required_ruby_version = '>= 1.8.7'
 
-  s.add_development_dependency 'rspec', '~> 2.5'
-  s.add_development_dependency 'rake-compiler', '~> 0.7.6'
+  s.add_development_dependency 'rspec', '~> 3.7.0'
+  s.add_development_dependency 'rspec-its', '~> 1.2.0'
+  s.add_development_dependency 'rake-compiler', '~> 1.0.4'
 end

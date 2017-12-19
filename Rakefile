@@ -7,7 +7,7 @@ Rake::ExtensionTask.new('uri_parser') do |ext|
   ext.source_pattern = "*.{c,cpp,cc,h}"
 end
 
-require "rspec/core/rake_task"
-RSpec::Core::RakeTask.new(:spec => :compile)
-task :default => :spec
+require 'rspec/core/rake_task'
 
+RSpec::Core::RakeTask.new(spec: :compile)
+task default: :spec
