@@ -1,0 +1,10 @@
+dist: trusty
+sudo: false
+language: ruby
+addons:
+  apt:
+    packages:
+      - libicu52
+      - libicu-dev
+rvm:
+  - 2.1

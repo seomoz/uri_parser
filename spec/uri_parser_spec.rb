@@ -21,18 +21,18 @@ describe URIParser do
     its(:host) { should == 'example.com' }
     its(:path) { should == '/foo/bar' }
     its(:query) { should == 'a=b&c=d' }
-    its(:valid?) { should be_true }
+    its(:valid?) { should be_truthy }
     its(:uri) { should == 'http://example.com/foo/bar?a=b&c=d' }
     its(:path_and_query) { should == '/foo/bar?a=b&c=d' }
     its(:query_params) { should == { 'a' => 'b', 'c' => 'd' } }
   end
 
   describe_parsed '@#4ioasfajdkshfas' do
-    its(:valid?) { should be_false }
+    its(:valid?) { should be_falsy }
   end
 
   describe_parsed 'http://руцентр.рф/Iñtërnâtiônàlizætiøn!?i18n=true' do
-    its(:valid?) { should be_true }
+    its(:valid?) { should be_truthy }
     its(:scheme) { should == 'http' }
     its(:host) { should == 'xn--e1aqhcjdv.xn--p1ai' }
     its(:path) { should == '/I%C3%B1t%C3%ABrn%C3%A2ti%C3%B4n%C3%A0liz%C3%A6ti%C3%B8n!' }
