@@ -3,6 +3,7 @@ require 'mkmf'
 extension_name = 'uri_parser'
 
 $CFLAGS << ' -Wno-deprecated -g '
+$CXXFLAGS << ' -DUCHAR_TYPE=uint16_t '
 
 if RUBY_PLATFORM =~ /linux|darwin/
 	$libs << ' -lstdc++'
