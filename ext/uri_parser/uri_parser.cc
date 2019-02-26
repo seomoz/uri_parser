@@ -21,7 +21,7 @@ typedef VALUE (ruby_method_vararg)(...);
 // Prototype for the initialization method - Ruby calls this, not you
 void Init_uri_parser();
 
-bool canonicalize(const std::string& input_spec,
+bool canonicalize_url(const std::string& input_spec,
 			std::string* canonical,
 			url_parse::Parsed* parsed)
 {
@@ -57,7 +57,7 @@ VALUE uri_parser_initialize(VALUE self, VALUE in)
 	std::string canonical;
 	url_parse::Parsed parsed;
 	
-	bool valid = canonicalize(url, &canonical, &parsed);
+	bool valid = canonicalize_url(url, &canonical, &parsed);
 
 	rb_iv_set(self, "@"ATTR_PORT, component_rb_str(canonical, parsed.port));
 	rb_iv_set(self, "@"ATTR_HOST, component_rb_str(canonical, parsed.host));
