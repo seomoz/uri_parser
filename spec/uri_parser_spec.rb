@@ -56,4 +56,21 @@ describe URIParser do
     its(:uri) { should == 'http://domain.com/?b=&c&d=5' }
     its(:query_params) { should == { 'b' => nil, 'c' => nil, 'd' => '5' } }
   end
+
+  describe_parsed 'http://domain.com/?&c=3&d=5' do
+    its(:uri) { should == 'http://domain.com/?&c=3&d=5' }
+    its(:query_params) { should == { nil => nil, 'c' => '3', 'd' => '5' } }
+  end
+
+  describe_parsed 'http://domain.com/?c=3&&d=5' do
+    its(:uri) { should == 'http://domain.com/?c=3&&d=5' }
+    its(:query_params) { should == { 'c' => '3', nil => nil, 'd' => '5' } }
+  end
+
+  describe_parsed 'http://domain.com/?c=3&d=5&' do
+    its(:uri) { should == 'http://domain.com/?c=3&d=5&' }
+    its(:query_params) { should == { 'c' => '3', 'd' => '5' } }
+  end
+
+
 end
