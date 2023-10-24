@@ -71,6 +71,4 @@ describe URIParser do
     its(:uri) { should == 'http://domain.com/?c=3&d=5&' }
     its(:query_params) { should == { 'c' => '3', 'd' => '5' } }
   end
-
-
 end
