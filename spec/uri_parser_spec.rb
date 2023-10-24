@@ -57,18 +57,33 @@ describe URIParser do
     its(:query_params) { should == { 'b' => nil, 'c' => nil, 'd' => '5' } }
   end
 
+  # empty first param (query starts with &)
   describe_parsed 'http://domain.com/?&c=3&d=5' do
     its(:uri) { should == 'http://domain.com/?&c=3&d=5' }
-    its(:query_params) { should == { nil => nil, 'c' => '3', 'd' => '5' } }
+    its(:query_params) { should == { 'c' => '3', 'd' => '5' } }
   end
 
+  # empty param (query contains &&)
   describe_parsed 'http://domain.com/?c=3&&d=5' do
     its(:uri) { should == 'http://domain.com/?c=3&&d=5' }
-    its(:query_params) { should == { 'c' => '3', nil => nil, 'd' => '5' } }
+    its(:query_params) { should == { 'c' => '3', 'd' => '5' } }
   end
 
+  # empty final param (query ends with &)
   describe_parsed 'http://domain.com/?c=3&d=5&' do
     its(:uri) { should == 'http://domain.com/?c=3&d=5&' }
     its(:query_params) { should == { 'c' => '3', 'd' => '5' } }
+  end
+
+  # no values for any keys
+  describe_parsed 'http://domain.com/?&b&c&&d' do
+    its(:uri) { should == 'http://domain.com/?&b&c&&d' }
+    its(:query_params) { should == { 'b' => nil, 'c' => nil, 'd' => nil } }
+  end
+
+  # no key for value "c"
+  describe_parsed 'http://domain.com/?b&=c&d' do
+    its(:uri) { should == 'http://domain.com/?b&=c&d' }
+    its(:query_params) { should == { 'b' => nil, '' => 'c', 'd' => nil } }
   end
 end
