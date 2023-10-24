@@ -22,7 +22,9 @@ class URIParser
           key, value = kv.split('=')
           key = CGI.unescape(key) if !key.nil?
           v = CGI.unescape(value) if !value.nil?
-          hash[key] = value && v
+          if !key.nil? || !value.nil?
+            hash[key] = value && v
+          end
         end
       end
     end
