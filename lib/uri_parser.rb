@@ -20,8 +20,11 @@ class URIParser
       {}.tap do |hash|
         k_v_pairs.each do |kv|
           key, value = kv.split('=')
-          hash[CGI.unescape(key)] = value && CGI.unescape(value)
+          key = CGI.unescape(key) if !key.nil?
+          v = CGI.unescape(value) if !value.nil?
+          hash[key] = value && v
         end
+        hash.reject! {|key, value| key.nil? && value.nil?}
       end
     end
   end
