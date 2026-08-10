@@ -3,7 +3,13 @@ require 'mkmf'
 extension_name = 'uri_parser'
 
 $CFLAGS << ' -Wno-deprecated -g '
-$CXXFLAGS << ' -DUCHAR_TYPE=uint16_t '
+# icu4c headers require C++17 (LocalPointer uses auto template parameters);
+# Ruby >= 3.1's mkmf strips -std= flags passed via --with-cxxflags, so it must
+# be set here.
+$CXXFLAGS << ' -DUCHAR_TYPE=uint16_t -std=gnu++17 '
+# icu headers use reserved user-defined literal syntax; this silence flag is
+# clang-only, so keep it off gcc/linux builds.
+$CXXFLAGS << ' -Wno-reserved-user-defined-literal ' if RUBY_PLATFORM =~ /darwin/
 
 if RUBY_PLATFORM =~ /linux|darwin/
 	$libs << ' -lstdc++'
@@ -16,18 +22,18 @@ else
 END_BAD_PLATFORM
 end
 
+def failure s
+  Logging::message s
+  message s+"\n"
+  exit(1)
+end
+
 # Check for compiler. Extract first word so ENV['CC'] can be a program name with arguments.
 cc = (ENV["CC"] or RbConfig::CONFIG["CC"] or "gcc").split(' ').first
 unless find_executable(cc)
 	failure "No C compiler found in ${ENV['PATH']}. See mkmf.log for details."
 end
 RbConfig::MAKEFILE_CONFIG['CC'] = cc
-
-def failure s
-  Logging::message s
-  message s+"\n"
-  exit(1)
-end
 
 def find_library_or_fail(lib,func)
 	unless have_library(lib, func)
