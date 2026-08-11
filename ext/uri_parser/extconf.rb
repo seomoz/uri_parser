@@ -54,4 +54,9 @@ find_header_or_fail("unicode/uidna.h")
 dir_config(extension_name)
 
 create_header
-create_makefile(extension_name)
+# Namespaced target so the built extension installs as
+# uri_parser/uri_parser.<ext>, which is what lib/uri_parser.rb requires.
+# Modern RubyGems builds extensions out-of-tree, so the historical reliance
+# on a build artifact being left behind in ext/ (reachable via the gemspec's
+# `require_paths = %w[lib ext]`) no longer holds.
+create_makefile("#{extension_name}/#{extension_name}")
